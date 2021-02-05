@@ -1,6 +1,6 @@
-var _wpCommonJs = {};
+var _commonJsUtils = {};
 
-_wpCommonJs.utils.isParamExists = (param) => {
+_commonJsUtils.isParamExists = (param) => {
     var field = param;
     var url = window.location.href;
     if (url.indexOf('?' + field + '=') != -1)
@@ -11,7 +11,7 @@ _wpCommonJs.utils.isParamExists = (param) => {
     return false
 }
 
-_wpCommonJs.utils.getGetValue = (param) => {
+_commonJsUtils.getGetValue = (param) => {
     var result = null,
         tmp = [];
     location.search
@@ -24,7 +24,7 @@ _wpCommonJs.utils.getGetValue = (param) => {
     return result;
 }
 
-_wpCommonJs.utils.insertGetParam = (url, name, value) => {
+_commonJsUtils.insertGetParam = (url, name, value) => {
     if (url.length === 0) {
         return;
     }
@@ -45,7 +45,7 @@ _wpCommonJs.utils.insertGetParam = (url, name, value) => {
     return (parsedURL.origin + parsedURL.pathname + parameters);
 }
 
-_wpCommonJs.utils.getGetList = (url = location.href) => {
+_commonJsUtils.getGetList = (url = location.href) => {
     var params = {};
     var parser = document.createElement('a');
     parser.href = url;
@@ -60,13 +60,13 @@ _wpCommonJs.utils.getGetList = (url = location.href) => {
     return params;
 }
 
-_wpCommonJs.utils.objectToUrlQuery = (params) => {
+_commonJsUtils.objectToUrlQuery = (params) => {
     var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
     return queryString;
 }
 
-_wpCommonJs.utils.asyncPost = (file, data, callback = null, xhr = false, onprogressXhr, onreadyXhr) => {
+_commonJsUtils.asyncPost = (file, data, callback = null, xhr = false, onprogressXhr, onreadyXhr) => {
     if (xhr) {
         return new Promise((resolve, reject) => {
 
@@ -78,7 +78,7 @@ _wpCommonJs.utils.asyncPost = (file, data, callback = null, xhr = false, onprogr
                 }
             };
 
-            req.open("POST", file + "?" + _wpCommonJs.utils.objectToUrlQuery(data), true);
+            req.open("POST", file + "?" + _commonJsUtils.objectToUrlQuery(data), true);
             req.send();
 
         })
@@ -95,7 +95,7 @@ _wpCommonJs.utils.asyncPost = (file, data, callback = null, xhr = false, onprogr
     }
 }
 
-_wpCommonJs.utils.removeElementFromArray = (arr, value) => {
+_commonJsUtils.removeElementFromArray = (arr, value) => {
 
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === value) {
@@ -106,15 +106,15 @@ _wpCommonJs.utils.removeElementFromArray = (arr, value) => {
     return arr;
 }
 
-_wpCommonJs.utils.getFileNameFromUrl = (url = _wpCommonJs.data.url.currentFile) => {
-    var filename = _wpCommonJs.data.url.currentFile.substring(_wpCommonJs.data.url.currentFile.lastIndexOf('/') + 1);
+_commonJsUtils.getFileNameFromUrl = (url = _commonJsUtils.data.url.currentFile) => {
+    var filename = _commonJsUtils.data.url.currentFile.substring(_commonJsUtils.data.url.currentFile.lastIndexOf('/') + 1);
     if (filename == "") {
         filename = "index.php";
     }
     return filename
 }
 
-_wpCommonJs.utils.generateToken = (n) => {
+_commonJsUtils.generateToken = (n) => {
     var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var token = '';
     for (var i = 0; i < n; i++) {
@@ -123,33 +123,7 @@ _wpCommonJs.utils.generateToken = (n) => {
     return token;
 }
 
-_wpCommonJs.utils.loader.show = async () => {
-
-    $.blockUI({
-        message: '<div class="spinner-border text-success  align-self-center loader-lg">Loading...</div>',
-        fadeIn: 200,
-        overlayCSS: {
-            backgroundColor: '#1b2024',
-            opacity: 0.8,
-            zIndex: 1200,
-            cursor: 'wait'
-        },
-        css: {
-            border: 0,
-            color: '#fff',
-            zIndex: 1201,
-            padding: 0,
-            backgroundColor: 'transparent'
-        }
-    });
-
-}
-
-_wpCommonJs.utils.loader.hide = () => {
-    $.unblockUI()
-}
-
-_wpCommonJs.utils.isArraysEqual = (a, b) => {
+_commonJsUtils.isArraysEqual = (a, b) => {
     if (a === b) return true;
     if (a == null || b == null) return false;
     if (a.length !== b.length) return false;
@@ -165,17 +139,16 @@ _wpCommonJs.utils.isArraysEqual = (a, b) => {
     return true;
 }
 
-_wpCommonJs.utils.getCurrentDir = () => {
+_commonJsUtils.getCurrentDir = () => {
     returnData = "";
     var link = document.createElement('a');
     link.href = '.';
     pathname = link.pathname;
-    returnData = pathname.replace("/wispychat/", "");
 
     return returnData;
 }
 
-_wpCommonJs.utils.delayer = (ms) => {
+_commonJsUtils.delayer = (ms) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(ms)
@@ -183,7 +156,7 @@ _wpCommonJs.utils.delayer = (ms) => {
     })
 }
 
-_wpCommonJs.utils.isValidJsonString = (jsonString) => {
+_commonJsUtils.isValidJsonString = (jsonString) => {
 
     if (!(jsonString && typeof jsonString === "string")) {
         return false;
@@ -198,7 +171,7 @@ _wpCommonJs.utils.isValidJsonString = (jsonString) => {
 
 }
 
-_wpCommonJs.utils.copyToClipboard = (str) => {
+_commonJsUtils.copyToClipboard = (str) => {
     const el = document.createElement('textarea');
     el.value = str;
     el.setAttribute('readonly', '');
@@ -210,187 +183,21 @@ _wpCommonJs.utils.copyToClipboard = (str) => {
     document.body.removeChild(el);
 };
 
-_wpCommonJs.utils.blobToFile = (theBlob, fileName) => {
+_commonJsUtils.blobToFile = (theBlob, fileName) => {
     //A Blob() is almost a File() - it's just missing the two properties below which we will add
     theBlob.lastModifiedDate = new Date();
     theBlob.name = fileName;
     return theBlob;
 }
 
-_wpCommonJs.utils.downloadBlob = (blob, name) => {
-    if (
-        window.navigator &&
-        window.navigator.msSaveOrOpenBlob
-    ) return window.navigator.msSaveOrOpenBlob(blob);
-
-    // For other browsers:
-    // Create a link pointing to the ObjectURL containing the blob.
-    const data = window.URL.createObjectURL(blob);
-
-    const link = document.createElement('a');
-    link.href = data;
-    link.download = name;
-
-    // this is necessary as link.click() does not work on the latest firefox
-    link.dispatchEvent(
-        new MouseEvent('click', {
-            bubbles: true,
-            cancelable: true,
-            view: window
-        })
-    );
-
-    setTimeout(() => {
-        // For Firefox it is necessary to delay revoking the ObjectURL
-        window.URL.revokeObjectURL(data);
-        link.remove();
-    }, 100);
-}
-
-_wpCommonJs.utils.downloadFile = (fileurl, filename) => {
-    return new Promise((resolve, reject) => {
-        var target = fileurl;
-        var xhr = new XMLHttpRequest();
-
-        // check compartibility
-        // reset progress bar
-        swal({
-            title: ``,
-            html: `
-            <div id="downloading">
-                <h3 style="text-align: center;">Downloading "${filename}"</h3>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        `,
-            showConfirmButton: true,
-            confirmButtonText: "Cancel",
-            padding: '2em'
-        }).then(function (result) {
-            if (result.value) {
-                xhr.abort()
-            }
-        })
-
-        $('.progress-bar').css('width', '0%').attr('aria-valuenow', 0);
-
-        xhr.overrideMimeType('application/octet-stream');
-        xhr.open('GET', target, true);
-        xhr.responseType = 'arraybuffer';
-        xhr.send();
-        xhr.onprogress = function (e) {
-            var value = e.loaded + "";
-            var prog = value[0] + value[1];
-            // update progress bar
-            $('.progress-bar').css('width', prog + '%').attr('aria-valuenow', prog);
-            $('.progress-bar').attr("aria-valuenow", prog);
-        };
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // fill progress bar
-                $('.progress-bar').css('width', '100%').attr('aria-valuenow', 100);
-                $('.progress-bar').attr("aria-valuenow", "100%");
-                var resArray = new Uint8Array(xhr.response);
-                var blob = new Blob([resArray], { type: 'application/octet-stream' });
-                _wpCommonJs.utils.downloadBlob(blob, filename)
-                $("#downloading").html("")
-
-                swal({
-                    title: `Successfully Downloaded "${filename}"`,
-                    type: "success",
-                    padding: '2em',
-                    confirmButtonText: "Not Downloaded Yet? Try Again!"
-                }).then(async function (result) {
-                    if (result.value) {
-                        await _wpCommonJs.utils.downloadFile(fileurl, filename);
-                    }
-                })
-
-                resolve()
-            } else {
-                xhr.onerror()
-            }
-
-        };
-
-        xhr.onerror = function () {
-            let statusText;
-            $("#downloading").html('');
-            if (xhr.statusText == "") {
-                statusText = ""
-            } else {
-                statusText = `Status: ${xhr.statusText}`;
-            }
-
-            swal({
-                title: `Downloading Failed of "${filename}"`,
-                text: `${statusText}`,
-                type: "error",
-                padding: '2em',
-                confirmButtonText: "Try Again"
-            }).then(function (result) {
-                if (result.value) {
-                    _wpCommonJs.utils.downloadFile(fileurl, filename);
-                }
-            })
-
-            delete statusText;
-        }
-    })
-}
-
-_wpCommonJs.utils.progressbar = (a = 0, b = "") => {
-    return new Promise((resolve, reject) => {
-        swal({
-            title: ``,
-            html: `
-                <div id="progressbar">
-                    <h4 style="text-align: center;" id="progressBarWpCommonStatus"></h4>
-                    <div class="progress br-30">
-                        <div id="progressBarWpCommon" class="progress-bar bg-gradient-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            `,
-            showCancelButton: false,
-            showCloseButton: false,
-            showConfirmButton: false
-        })
-        document.getElementById("progressBarWpCommon").style.width = a + "%";
-        document.getElementById("progressBarWpCommon").innerHTML = a + "%";
-        document.getElementById("progressBarWpCommonStatus").innerHTML = b;
-
-        resolve({
-            set: function (p) {
-                document.getElementById("progressBarWpCommon").style.width = p + "%";
-                document.getElementById("progressBarWpCommon").innerHTML = p + "%";
-            },
-            done: function () {
-                swal.close()
-            },
-            status: function (s) {
-                document.getElementById("progressBarWpCommonStatus").innerHTML = s
-            }
-        })
-
-    })
-}
-
-_wpCommonJs.utils.bytesToSize = (bytes) => {
+_commonJsUtils.bytesToSize = (bytes) => {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
     if (bytes == 0) return '0 Byte';
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
 
-_wpCommonJs.utils.notify = (text, bgcolor) => {
-    Snackbar.show({
-        text: text,
-        backgroundColor: bgcolor
-    });
-}
-
-_wpCommonJs.utils.fileSelector = (multiple = false) => {
+_commonJsUtils.fileSelector = (multiple = false) => {
     return new Promise((resolve, reject) => {
         var fileSelectorInput = document.createElement('input');
         fileSelectorInput.setAttribute('type', 'file');
@@ -420,3 +227,45 @@ _wpCommonJs.utils.fileSelector = (multiple = false) => {
         })
     })
 }
+
+_commonJsUtils.importCss = (file) => {
+    return new Promise((resolve, reject) => {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = file;
+        link.onload = () => { resolve(); }
+        link.onerror = () => {
+            resolve();
+        }
+
+        document.getElementsByTagName('head')[0].appendChild(link);
+    })
+}
+
+_commonJsUtils.importJs = (file) => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: file,
+            dataType: "script",
+            success: function () {
+                resolve();
+            },
+            error: function (jqXHR, exception) {
+                resolve({ jqXHR, exception })
+            }
+        });
+    })
+}
+
+_commonJsUtils.removeImports = (filename, filetype) => {
+    var targetelement = (filetype == "js") ? "script" : (filetype == "css") ? "link" : "none" //determine element type to create nodelist from
+    var targetattr = (filetype == "js") ? "src" : (filetype == "css") ? "href" : "none" //determine corresponding attribute to test for
+    var allsuspects = document.getElementsByTagName(targetelement)
+    for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
+        if (allsuspects[i] && allsuspects[i].getAttribute(targetattr) != null && allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1)
+            allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
+    }
+}
+
+
